@@ -4,46 +4,6 @@
     <template #wrapper>
       <el-card class="box-card">
         <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
-          <el-form-item label="店铺id" prop="shopId"><el-input
-            v-model="queryParams.shopId"
-            placeholder="请输入店铺id"
-            clearable
-            size="small"
-            @keyup.enter.native="handleQuery"
-          />
-          </el-form-item>
-          <el-form-item label="店铺名字" prop="shopName"><el-input
-            v-model="queryParams.shopName"
-            placeholder="请输入店铺名字"
-            clearable
-            size="small"
-            @keyup.enter.native="handleQuery"
-          />
-          </el-form-item>
-          <el-form-item label="交易类型" prop="type"><el-input
-            v-model="queryParams.type"
-            placeholder="请输入交易类型"
-            clearable
-            size="small"
-            @keyup.enter.native="handleQuery"
-          />
-          </el-form-item>
-          <el-form-item label="MSKU" prop="sku"><el-input
-            v-model="queryParams.sku"
-            placeholder="请输入MSKU"
-            clearable
-            size="small"
-            @keyup.enter.native="handleQuery"
-          />
-          </el-form-item>
-          <el-form-item label="销售市场" prop="marketplace"><el-input
-            v-model="queryParams.marketplace"
-            placeholder="请输入销售市场"
-            clearable
-            size="small"
-            @keyup.enter.native="handleQuery"
-          />
-          </el-form-item>
 
           <el-form-item>
             <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -54,7 +14,7 @@
         <el-row :gutter="10" class="mb8">
           <el-col :span="1.5">
             <el-button
-              v-permisaction="['admin:transaction_detail:add']"
+              v-permisaction="['admin:transaction:add']"
               type="primary"
               icon="el-icon-plus"
               size="mini"
@@ -64,7 +24,7 @@
           </el-col>
           <el-col :span="1.5">
             <el-button
-              v-permisaction="['admin:transaction_detail:edit']"
+              v-permisaction="['admin:transaction:edit']"
               type="success"
               icon="el-icon-edit"
               size="mini"
@@ -75,7 +35,7 @@
           </el-col>
           <el-col :span="1.5">
             <el-button
-              v-permisaction="['admin:transaction_detail:remove']"
+              v-permisaction="['admin:transaction:remove']"
               type="danger"
               icon="el-icon-delete"
               size="mini"
@@ -87,196 +47,11 @@
         </el-row>
 
         <el-table v-loading="loading" :data="financeList" @selection-change="handleSelectionChange">
-          <el-table-column type="selection" width="55" align="center" /><el-table-column
-            label="结算日期"
-            align="center"
-            prop="paymentTime"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="发货日期"
-            align="center"
-            prop="earliestShipDate"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="图片"
-            align="center"
-            prop="mainImage"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="ASIN"
-            align="center"
-            prop="asin"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="品名"
-            align="center"
-            prop="commodityName"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="商品SKU"
-            align="center"
-            prop="commoditySku"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="采购成本"
-            align="center"
-            prop="purchaseCost"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="头程费用"
-            align="center"
-            prop="headTripCost"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="毛利润"
-            align="center"
-            prop="grossProfit"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="币种"
-            align="center"
-            prop="currency"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="店铺id"
-            align="center"
-            prop="shopId"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="店铺名字"
-            align="center"
-            prop="shopName"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="市场ID"
-            align="center"
-            prop="marketPlaceId"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="结算ID"
-            align="center"
-            prop="settlementId"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="交易类型"
-            align="center"
-            prop="type"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="描述"
-            align="center"
-            prop="description"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="订单号"
-            align="center"
-            prop="orderId"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="类型"
-            align="center"
-            prop="accountType"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="MSKU"
-            align="center"
-            prop="sku"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="销售市场"
-            align="center"
-            prop="marketplace"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="发货方式"
-            align="center"
-            prop="fulfillment"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="数量"
-            align="center"
-            prop="quantity"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="销售价格"
-            align="center"
-            prop="productSales"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="运费"
-            align="center"
-            prop="shippingCredits"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="礼品包装费"
-            align="center"
-            prop="giftWrapCredits"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="促销返点"
-            align="center"
-            prop="promotionalRebates"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="销售税"
-            align="center"
-            prop="productSalesTax"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="市场税"
-            align="center"
-            prop="marketplaceWithheldTax"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="平台佣金"
-            align="center"
-            prop="sellingFees"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="FBA Fees"
-            align="center"
-            prop="fbaFees"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="其他交易费"
-            align="center"
-            prop="otherTransactionFees"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="其他费"
-            align="center"
-            prop="other"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="亚马逊结算小计"
-            align="center"
-            prop="total"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="积分"
-            align="center"
-            prop="integral"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="订单其他佣金"
-            align="center"
-            prop="orderOtherFee"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="评估费用"
-            align="center"
-            prop="evaluationFee"
-            :show-overflow-tooltip="true"
-          /><el-table-column
-            label="FBM 运费"
-            align="center"
-            prop="fbmShipCost"
-            :show-overflow-tooltip="true"
-          />
+          <el-table-column type="selection" width="55" align="center" />
           <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
             <template slot-scope="scope">
               <el-button
-                v-permisaction="['admin:transaction_detail:edit']"
+                v-permisaction="['admin:transaction:edit']"
                 size="mini"
                 type="text"
                 icon="el-icon-edit"
@@ -284,7 +59,7 @@
               >修改
               </el-button>
               <el-button
-                v-permisaction="['admin:transaction_detail:remove']"
+                v-permisaction="['admin:transaction:remove']"
                 size="mini"
                 type="text"
                 icon="el-icon-delete"
@@ -307,6 +82,39 @@
         <el-dialog :title="title" :visible.sync="open" width="500px">
           <el-form ref="form" :model="form" :rules="rules" label-width="80px">
 
+            <el-form-item label="" prop="createdAt">
+              <el-date-picker
+                v-model="form.createdAt"
+                type="datetime"
+                placeholder="选择日期"
+              />
+            </el-form-item>
+            <el-form-item label="" prop="updatedAt">
+              <el-date-picker
+                v-model="form.updatedAt"
+                type="datetime"
+                placeholder="选择日期"
+              />
+            </el-form-item>
+            <el-form-item label="" prop="deletedAt">
+              <el-date-picker
+                v-model="form.deletedAt"
+                type="datetime"
+                placeholder="选择日期"
+              />
+            </el-form-item>
+            <el-form-item label="" prop="createBy">
+              <el-input
+                v-model="form.createBy"
+                placeholder=""
+              />
+            </el-form-item>
+            <el-form-item label="" prop="updateBy">
+              <el-input
+                v-model="form.updateBy"
+                placeholder=""
+              />
+            </el-form-item>
             <el-form-item label="结算日期" prop="paymentTime">
               <el-input
                 v-model="form.paymentTime"
@@ -548,11 +356,11 @@
 </template>
 
 <script>
-import { addTransactionDetail, delTransactionDetail, getTransactionDetail, listTransactionDetail, updateTransactionDetail } from '@/api/transaction_detail'
+import { addErpFinanceTransaction, delErpFinanceTransaction, getErpFinanceTransaction, listErpFinanceTransaction, updateErpFinanceTransaction } from '@/api/transaction'
 import FileChoose from '@/components/FileChoose'
 
 export default {
-  name: 'TransactionDetail',
+  name: 'ErpFinanceTransaction',
   components: {
     FileChoose
   },
@@ -584,39 +392,14 @@ export default {
       // 查询参数
       queryParams: {
         pageIndex: 1,
-        pageSize: 10,
-        shopId: undefined,
-        shopName: undefined,
-        type: undefined,
-        sku: undefined,
-        marketplace: undefined
+        pageSize: 10
 
       },
       // 表单参数
       form: {
       },
       // 表单校验
-      rules: { shopId:
-                [
-                  { required: true, message: '店铺id不能为空', trigger: 'blur' }
-                ],
-      shopName:
-                [
-                  { required: true, message: '店铺名字不能为空', trigger: 'blur' }
-                ],
-      type:
-                [
-                  { required: true, message: '交易类型不能为空', trigger: 'blur' }
-                ],
-      sku:
-                [
-                  { required: true, message: 'MSKU不能为空', trigger: 'blur' }
-                ],
-      marketplace:
-                [
-                  { required: true, message: '销售市场不能为空', trigger: 'blur' }
-                ]
-      }
+      rules: {}
     }
   },
   created() {
@@ -626,7 +409,7 @@ export default {
     /** 查询参数列表 */
     getList() {
       this.loading = true
-      listTransactionDetail(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+      listErpFinanceTransaction(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
         this.financeList = response.data.list
         this.total = response.data.count
         this.loading = false
@@ -721,7 +504,7 @@ export default {
       this.reset()
       const id =
                 row.id || this.ids
-      getTransactionDetail(id).then(response => {
+      getErpFinanceTransaction(id).then(response => {
         this.form = response.data
         this.open = true
         this.title = '修改结算明细'
@@ -733,7 +516,7 @@ export default {
       this.$refs['form'].validate(valid => {
         if (valid) {
           if (this.form.id !== undefined) {
-            updateTransactionDetail(this.form).then(response => {
+            updateErpFinanceTransaction(this.form).then(response => {
               if (response.code === 200) {
                 this.msgSuccess('修改成功')
                 this.open = false
@@ -743,7 +526,7 @@ export default {
               }
             })
           } else {
-            addTransactionDetail(this.form).then(response => {
+            addErpFinanceTransaction(this.form).then(response => {
               if (response.code === 200) {
                 this.msgSuccess('新增成功')
                 this.open = false
@@ -765,7 +548,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(function() {
-        return delTransactionDetail({ 'ids': Ids })
+        return delErpFinanceTransaction({ 'ids': Ids })
       }).then(() => {
         this.getList()
         this.msgSuccess('删除成功')

@@ -43,4 +43,3 @@ export function delErpFinanceSummary(data) {
     data: data
   })
 }
-
